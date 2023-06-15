@@ -28,7 +28,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"username":"user1", "passw
    - Remember user checkbox.
    - Submit button that launch the action.
 
-   It would be valued an explanation about the solution (used validation library, how to validate inputs, messages shown, etc)
+   It would be valued an explanation about the solution (used validation library, how to validate inputs, messages shown, etc). Also for this test it should be valuable do not use css classes although tailwind utilities.
 
 3. Create a provider for using Axios in the whole application. It exposes a `login` method that call the server and save the user in the local storage. It returns the user as well for the `Login` component.
 
@@ -39,11 +39,13 @@ It would be valued an explanation about the solution (used hook, how, etc)
    - Test that `Login` component calls `login` method inside the provider.
    - Test that icon in the password input change the visibility state of password input.
 
-It would be valued an explanation about the solution (testing framework, why it is a unit test, etc)
+It would be valued an explanation about the solution (testing framework, why it is a unit test, etc).
 
 ## Delivery
 
 All exercises should be delivered by creating a PR in the same repo that you cloned. You could do a single commit or a bunch of them. As you wish.
+
+The time limit is 2 hours, but early delivers will be valued positively.
 
 ## Candidate explanations
 

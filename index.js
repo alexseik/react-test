@@ -4,7 +4,7 @@ const app = express();
 app.use(bodyParser.json());
 const users = [
   {
-    username: 'user1',
+    username: 'test@test.com',
     password: 'password1',
   },
   {

@@ -25,7 +25,12 @@ const App = () => {
     setRememberUser(!rememberUser);
   };
 
-  const handleSubmit = (e) => {
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation
@@ -39,6 +44,13 @@ const App = () => {
       return;
     }
 
+    try {
+      const user = await api.login(email, password);
+      console.log('Login successful:', user);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Remember User:", rememberUser);
@@ -47,20 +59,6 @@ const App = () => {
     setPassword("");
     setRememberUser(false);
     setErrorMessage("");
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleLogin = async () => {
-    try {
-      const user = await api.login(email, password);
-      console.log('Login successful:', user);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
   };
 
   return (
@@ -76,9 +74,10 @@ const App = () => {
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
           />
         </div>
+        {errorMessage && <p className="text-red-500 text-xs italic">{errorMessage}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
             Password
@@ -90,11 +89,11 @@ const App = () => {
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
             />
             <button
               className="absolute right-0 top-0 mr-4 mt-2"
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={handleShowPassword}
               type="button"
             >
               {showPassword ? (
@@ -137,7 +136,7 @@ const App = () => {
         </div>
         <div className="mb-4">
           <label className="flex items-center">
-            <input className="mr-2 leading-tight" type="checkbox" />
+            <input className="mr-2 leading-tight" type="checkbox" onClick={handleRememberUser}/>
             <span className="text-sm">Remember user</span>
           </label>
         </div>
@@ -145,7 +144,7 @@ const App = () => {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
-            onClick={handleLogin}
+            onClick={handleSubmit}
           >
             Submit
           </button>

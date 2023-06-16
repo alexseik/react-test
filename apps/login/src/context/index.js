@@ -9,8 +9,6 @@ export const ApiProvider = ({ children }) => {
   });
 
   const login = async (email, password) => {
-    console.log("🚀 ~ file: index.js:12 ~ login ~ email:", email)
-    console.log("🚀 ~ file: index.js:12 ~ login ~ password:", password)
     try {
       const response = await axiosInstance.post("/login", {
         email,

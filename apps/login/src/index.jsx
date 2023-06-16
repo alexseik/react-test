@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ApiProvider } from "./context";
 import App from "./App";
-import "./tailwind.css";
+import "./index.css";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root")
 );
 
 root.render(
